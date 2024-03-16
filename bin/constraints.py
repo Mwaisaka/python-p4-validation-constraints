@@ -26,19 +26,27 @@ Session = sessionmaker(db)
 session = Session()
 base.metadata.create_all(db)
 
-p1 = Patient(name="Steve", birth_year=2000, death_year=2022)
+
+p1 = Patient(name="Stevensons", birth_year=2000, death_year=2022)
 session.add(p1)
 session.commit()
 
+# p1 = session.query(Patient).filter_by(name="Steven").first()
 
-p3 = Patient(name="Brad", birth_year=2025, death_year=2066)
+# # Delete p1 if found
+# if p1:
+#     session.delete(p1)
+#     session.commit()
+#     print("Patient 'Stevenson' deleted successfully")
+# else:
+#     print("Patient 'Stevenson' not found in the database")
+
+p3 = Patient(name="Bradson", birth_year=2021, death_year=2066)
 session.add(p3)
 session.commit()
 
 p2 = Patient(name="Max", birth_year=2010, death_year=1950)
 session.add(p2)
-
-
 
 try:
     session.commit()
@@ -46,3 +54,4 @@ try:
 except sqlalchemy.exc.IntegrityError as e:
     print('Invalid ages: integrity violation blocked')
     session.rollback()
+
